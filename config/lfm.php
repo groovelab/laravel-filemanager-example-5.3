@@ -12,7 +12,7 @@ return [
 
     // Middlewares which should be applied to all package routes.
     // For laravel 5.1 and before, remove 'web' from the array.
-    'middlewares' => ['web','auth'],
+    'middlewares' => ['web'],
 
     // The url to this package. Change it if necessary.
     'prefix' => 'laravel-filemanager',
@@ -31,7 +31,18 @@ return [
     // Flexibla way to customize client folders accessibility
     // Ex: The private folder of user will be named as the user id.
     'user_field' => function() {
-        return auth()->user()->id;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_GET['user_id'])) {
+            $_SESSION['user_id'] = intval($_GET['user_id']);
+        }
+        if (isset($_SESSION['user_id'])) {
+            return intval($_SESSION['user_id']);
+        }
+
+        //  FIXME: queryにパスワード的なものを含めることで簡単な認証を行う？
+        exit;
     },
 
     /*

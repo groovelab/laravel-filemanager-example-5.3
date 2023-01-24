@@ -17,15 +17,3 @@ services:
             dockerfile: deploy/app.docker
         volumes:
             - ./:/var/www
-        links:
-            - database
-        environment:
-            - "DB_PORT=3306"
-            - "DB_HOST=database"
-    database:
-        image: mysql:8.0.31
-        environment:
-            - "MYSQL_ROOT_PASSWORD=secret"
-            - "MYSQL_DATABASE=filemanager"
-        ports:
-            - "33061:3306"

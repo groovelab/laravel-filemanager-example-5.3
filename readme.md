@@ -19,15 +19,5 @@ Remember to run `make test`, make sure all tests are passed before sending new p
 docker-compose up --build -d
 ```
 
-## app container bash
-```bash
-make init
-php artisan serve&   # 必要なし？ 要チェック
-```
-
-## mysql
-```
-# 必要なし？ 要チェック
-mysql -uroot -h 127.0.0.1 -p -P 33061 -D filemanager
-    secret
-```
+access to
+http://localhost/laravel-filemanager?type=image&user_id=1
