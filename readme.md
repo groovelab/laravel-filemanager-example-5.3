@@ -9,3 +9,25 @@ This project already integrated [unisharp/laravel-filemanager](https://github.co
 
 ## Notes for developers
 Remember to run `make test`, make sure all tests are passed before sending new pull requests.
+
+
+
+
+# Fix Step
+## docker compose
+```bash
+docker-compose up --build -d
+```
+
+## app container bash
+```bash
+make init
+php artisan serve&   # 必要なし？ 要チェック
+```
+
+## mysql
+```
+# 必要なし？ 要チェック
+mysql -uroot -h 127.0.0.1 -p -P 33061 -D filemanager
+    secret
+```

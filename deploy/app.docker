@@ -1,6 +1,20 @@
-FROM php:7-fpm
+FROM php:7.4.33-fpm-alpine
 
-RUN apt-get update && apt-get install -y libmcrypt-dev mysql-client \
-    && docker-php-ext-install mcrypt pdo_mysql
+RUN apk update && apk add bash
+RUN apk update && \
+    apk add --update --no-cache \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    libpng-dev
+RUN docker-php-ext-configure gd --with-jpeg
+RUN docker-php-ext-install -j$(nproc) gd exif
+RUN docker-php-ext-configure exif \
+    --enable-exif
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+ENV COMPOSER_HOME /composer
 
 WORKDIR /var/www
